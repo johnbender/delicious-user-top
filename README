@@ -1,4 +1,4 @@
-The delicious-top-user.js plugin is meant to be used for blogs and particularly forums. It was built for use at "erlanguid.com":http://erlanguid.com but can be easily employed anywhere. 
+The delicious-top-user.js plugin is meant to be used for blogs and particularly forums. It was built for use at http://erlanguid.com but can be easily employed anywhere. 
 
 Use: 
 
@@ -7,4 +7,4 @@ Use:
 
 Thats it! If you have any problems message me, and rememeber you can use multiple tags by stringing them like "<uname>|<tag1>+<tag2>", BUT it will only return the intersection of the links with each tag.
 
-You can see a more indepth explanation of the functionality at :nickelcode.com":http://nickelcode.com/2008/12/06/delicious-user-top-javascript/.
+You can see a more indepth explanation of the functionality at http://nickelcode.com/2008/12/06/delicious-user-top-javascript/.
