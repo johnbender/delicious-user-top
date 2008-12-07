@@ -8,7 +8,7 @@ URL = "http://feeds.delicious.com/v2/json/{0}/{1}?callback={2}&count={3}";
 //The following 3 templates will be used to get the json data to DisplayLinks 
 //targeted at the correct user divs
 TARGETED_FUNCTION_NAME = "DeliciousUserTop.Display{0}Links";
-TARGETED_FUNCTION_CALL = "{0}=function(data){DeliciousUserTop.DisplayLinks(data, '{1}');}";
+TARGETED_FUNCTION_CALL =      "{0}=function(data){DeliciousUserTop.DisplayLinks(data, '{1}');}"
 TARGETED_SCRIPT_TEMPLATE = "<script type='text/javascript'>{0}</script>";
 //extra templates
 REMOTE_SCRIPT_TEMPLATE = "<script type='text/javascript' src='{0}'></script>";
@@ -16,14 +16,14 @@ DELICIOUS_TOP_SELECTOR = ".delicious-user-top-links";
 LINK_TEMPLATE =
     "<div class='delicious-user-top-link'>"
     +   "<a href='{0}' target='_blank'>"
-    +  	  "{1}<img class='delicious-user-top-link-image' src='http://erlanguid.com/icons/external.png'>"
+    +  	  "{1}" //+ "<img class='delicious-user-top-link-image' src='http://erlanguid.com/icons/external.png'>"
     +	  "</a>"
     +"</div>";
 
 
 MAX_DISPLAY_LINKS = 10;
 LINK_TEXT_MAX_LENGTH = 50;
-ELIPSE = '[...]';
+ELLIPSIS = '..';
 
 var DeliciousUserTop = new function(){
     this.displayObjects = new Array();
@@ -97,7 +97,7 @@ var DeliciousUserTop = new function(){
                     var link_text = obj.d.substring(0, LINK_TEXT_MAX_LENGTH);
 
                     if(obj.d.length > LINK_TEXT_MAX_LENGTH)
-                        link_text += ELIPSE;
+                        link_text += ELLIPSIS;
 
                     div.innerHTML = div.innerHTML + format(LINK_TEMPLATE, obj.u, link_text);
                 });
@@ -106,7 +106,32 @@ var DeliciousUserTop = new function(){
                 div.style.display = "block";
             }
         }
-    } 
+    }
+
+    this.ToggleLinkVisibility = function(element)
+    {
+        var HIDE_TEXT = 'hide';
+        var SHOW_TEXT = 'view';
+
+        //take the show hide element, generally a link 
+        //and change the text to what makes sense.
+        $(element).children('a.show-delicious-user-top').each( function() {
+            if(this.innerHTML == SHOW_TEXT)
+                this.innerHTML = HIDE_TEXT;
+            else
+                this.innerHTML = SHOW_TEXT;
+        }); 
+
+        //show hide the elements given their state
+        $(element).siblings().each( function(){
+
+            var jElement = $(this);
+            if(jElement.css('display') == 'none')
+                jElement.show();
+            else
+                jElement.hide();   
+        });
+    }  
 }
 //used to create clean insertion of strings into templates
 function format(str)
@@ -117,6 +142,10 @@ function format(str)
     }
     return str;
 }
-//Go Get Those REPOS!
-$(document).ready(function(){DeliciousUserTop.GetLinks();});
+//Go Get Those Links!
+$(document).ready(function(){
+
+    DeliciousUserTop.GetLinks();
+
+    });
 
