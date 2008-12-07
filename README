@@ -1,3 +1,5 @@
+Requires jQuery 1.2.6 included in the page. 
+
 The delicious-top-user.js plugin is meant to be used for blogs and particularly forums. It was built for use at http://erlanguid.com but can be easily employed anywhere. 
 
 Use: 
